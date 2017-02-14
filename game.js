@@ -1,14 +1,22 @@
 var inquirer = require('inquirer')
 var Word = require('./word.js');
 
+//Available words
+
 var words = ['table', 'baseball', 'platypus'];
+
+//Number of guesses left
 
 var guessesLeft = "6";
 
+//Chooses random word
+
 var wordToPlay = words[Math.floor(Math.random() * words.length)];
 
+// Creates the word
 var wordObject = new Word(wordToPlay);
 wordObject.makeAndPushLettersIntoWord();
+
 
 console.log(wordObject.display());
 
@@ -56,9 +64,10 @@ function askLetter() {
                 doAgain = true;
             }
 
-            else if (data.guess === wordToPlay) { //this will never happen
-                console.log("You win!")
-            }
+            // else if (wordobject == wordObject) { //this will never happen
+            //     // wordObject.win();
+            //     wordObject.win();
+            // }
 
             if (doAgain){
                 doAgain = false;

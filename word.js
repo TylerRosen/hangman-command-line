@@ -9,6 +9,8 @@ function Word(word) {
             this.letters.push(lett);
         }
     },
+
+    // Displays letters in terminal
         this.display = function () {
             var str = "";
             for (var i = 0; i < this.letters.length; i++) {
@@ -25,8 +27,10 @@ function Word(word) {
         //one way
         for (var i = 0; i < this.letters.length; i++) {
             if (this.letters[i].letter == guess) this.letters[i].found = true;
+            if (this.word[i].found == true) console.log("You win!");
         }
     }
+
 }
 
 //Check if win (loop through letters, if every one is true, then you win)
