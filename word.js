@@ -27,7 +27,6 @@ function Word(word) {
         //one way
         for (var i = 0; i < this.letters.length; i++) {
             if (this.letters[i].letter == guess) this.letters[i].found = true;
-            if (this.word[i].found == true) console.log("You win!");
         }
     }
 

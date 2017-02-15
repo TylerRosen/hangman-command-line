@@ -3,11 +3,14 @@ var Word = require('./word.js');
 
 //Available words
 
-var words = ['table', 'baseball', 'platypus'];
+var words = ['table', 'hockey', 'computer'];
 
 //Number of guesses left
 
 var guessesLeft = "6";
+
+//Stores number of correct guesses
+var correctGuesses = 0;
 
 //Chooses random word
 
@@ -17,9 +20,10 @@ var wordToPlay = words[Math.floor(Math.random() * words.length)];
 var wordObject = new Word(wordToPlay);
 wordObject.makeAndPushLettersIntoWord();
 
-
+//Displays dasshes on page
 console.log(wordObject.display());
 
+//Displays # of guesses left
 console.log("Guesses Left : " + guessesLeft);
 
 function askLetter() {
@@ -43,8 +47,12 @@ function askLetter() {
                 console.log("Guesses Left : " + guessesLeft);
 
                 doAgain = true;
+
             } else {
+            // Display correct letter
                 wordObject.updateLetter(data.guess);
+
+                correctGuesses++;
 
                 console.log(wordObject.display());
 
@@ -55,21 +63,31 @@ function askLetter() {
 
             if (guessesLeft == 0) {
                 console.log("You lose!");
-                wordToPlay = words[Math.floor(Math.random() * words.length)];
+            
+            //Restarts game
+                function restart() {
+                    correctGuesses = 0;
+                    wordToPlay = words[Math.floor(Math.random() * words.length)];
 
-                wordObject = new Word(wordToPlay);
-                wordObject.makeAndPushLettersIntoWord()
-                guessesLeft = 6;
-                console.log(wordObject.display());
-                doAgain = true;
+                    wordObject = new Word(wordToPlay);
+                    wordObject.makeAndPushLettersIntoWord()
+                    guessesLeft = 6;
+                    console.log(wordObject.display());
+                    doAgain = true;
+
+                }
+
+                restart();
+
+            
+            //Checks if all correct letters are guessed
+            } else if (correctGuesses == wordObject.display().length) {
+                console.log("You Win!")
+
+                restart();
             }
 
-            // else if (wordobject == wordObject) { //this will never happen
-            //     // wordObject.win();
-            //     wordObject.win();
-            // }
-
-            if (doAgain){
+            if (doAgain) {
                 doAgain = false;
                 askLetter();
             }
